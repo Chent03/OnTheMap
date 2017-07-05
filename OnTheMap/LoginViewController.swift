@@ -17,41 +17,47 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.activityViewToggle(isON: false)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.hideKeyBoardTapped()
     }
     
     @IBAction func loginPressed(_ sender: UIButton){
         
-        guard let email = emailTextField.text else {
-//            print("No email entered")
-            return
-        }
         
-        guard let password = passwordTextField.text else {
-//            print("No password entered")
-            return
-        }
+        self.activityViewToggle(isON: true)
+    
         
         if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty{
             self.alertBox(message: "Enter Credentials")
+            self.activityViewToggle(isON: false)
         } else {
             
-            print(email)
-            print(password)
+            let email = emailTextField.text!
+            let password = passwordTextField.text!
+            
             UClient.sharedInstance().loginUdacity(email: email, password: password){ (success, results, error) in
                 DispatchQueue.main.async {
+                    
+                    
                     guard error == nil else {
-//                        print("Login failed")
-                        self.alertBox(message: "Incorrect email and/or password.")
+                        self.alertBox(message: (error?.localizedDescription)!)
+                        self.activityViewToggle(isON: false)
                         return
                     }
-                    guard success == true else {
-//                        print("Success was false")
-                        return
+                    
+                    if success {
+                        self.completeLogin()
+                        self.activityViewToggle(isON: false)
                     }
-                    self.completeLogin()
                     
                 }
             }
@@ -65,6 +71,16 @@ class LoginViewController: UIViewController {
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapTabBarController") as! UITabBarController
             self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    private func activityViewToggle(isON: Bool){
+        if isON{
+            self.activityView.isHidden = false
+            self.activityView.startAnimating()
+        }else {
+            self.activityView.isHidden = true
+            self.activityView.stopAnimating()
         }
     }
     

@@ -77,14 +77,20 @@
                                     <action selector="signup:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kkH-hi-Pzh"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="gD0-oQ-YUp">
+                                <rect key="frame" x="197" y="464" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LPt-0h-Hq4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="119" id="0fW-sg-fg3"/>
+                            <constraint firstItem="gD0-oQ-YUp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="177" id="5d9-DC-BvO"/>
                             <constraint firstItem="GBD-1b-A89" firstAttribute="top" secondItem="LPt-0h-Hq4" secondAttribute="bottom" constant="8" id="Ajd-S6-sVG"/>
                             <constraint firstItem="GBD-1b-A89" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Br7-wd-rre"/>
+                            <constraint firstItem="gD0-oQ-YUp" firstAttribute="top" secondItem="2hk-Du-T7c" secondAttribute="bottom" constant="81" id="Kl4-a4-E99"/>
                             <constraint firstAttribute="trailing" secondItem="2hk-Du-T7c" secondAttribute="trailing" id="L0e-mr-jWU"/>
                             <constraint firstItem="P0w-6e-IzX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="NYV-Se-6Gn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gD0-oQ-YUp" secondAttribute="trailing" constant="177" id="Ob9-Ih-bei"/>
                             <constraint firstItem="cSS-4g-qEG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="P1Z-sh-x5t"/>
                             <constraint firstItem="2hk-Du-T7c" firstAttribute="top" secondItem="P0w-6e-IzX" secondAttribute="bottom" constant="9" id="VrR-HV-89c"/>
                             <constraint firstItem="LPt-0h-Hq4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Zg2-Iu-eA0"/>
@@ -99,6 +105,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityView" destination="gD0-oQ-YUp" id="qYG-WE-be6"/>
                         <outlet property="emailTextField" destination="GBD-1b-A89" id="nxk-a2-CGs"/>
                         <outlet property="loginButton" destination="P0w-6e-IzX" id="Ggh-Fi-vpa"/>
                         <outlet property="passwordTextField" destination="cSS-4g-qEG" id="svR-bo-Ldx"/>
@@ -335,12 +342,18 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHi-g2-oKy">
+                                        <rect key="frame" x="197" y="196" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.56021216196906454" green="0.86072379684233624" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="CHi-g2-oKy" firstAttribute="top" secondItem="a7e-CS-rma" secondAttribute="bottom" constant="136" id="2Rk-Z6-OjS"/>
                                     <constraint firstAttribute="trailing" secondItem="a7e-CS-rma" secondAttribute="trailing" id="HYm-7y-ghQ"/>
+                                    <constraint firstItem="CHi-g2-oKy" firstAttribute="leading" secondItem="qDn-hw-5An" secondAttribute="leading" constant="197" id="On0-Vb-O0A"/>
                                     <constraint firstAttribute="height" constant="412" id="Pvh-Lt-W8t"/>
                                     <constraint firstItem="a7e-CS-rma" firstAttribute="top" secondItem="qDn-hw-5An" secondAttribute="top" id="ubK-ee-oxi"/>
+                                    <constraint firstAttribute="trailing" secondItem="CHi-g2-oKy" secondAttribute="trailing" constant="197" id="vEb-Dj-Ydx"/>
                                     <constraint firstItem="a7e-CS-rma" firstAttribute="leading" secondItem="qDn-hw-5An" secondAttribute="leading" id="zl6-Ru-8Vb"/>
                                 </constraints>
                             </view>
@@ -371,6 +384,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activitySpinner" destination="CHi-g2-oKy" id="CMu-LJ-5kt"/>
                         <outlet property="bottomView" destination="3Ix-3a-Wgh" id="L8d-8Y-uEN"/>
                         <outlet property="introLabel" destination="Pew-AE-W2A" id="ATL-WS-jjO"/>
                         <outlet property="locationText" destination="a7e-CS-rma" id="zHr-oJ-Lln"/>

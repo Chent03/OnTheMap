@@ -6,7 +6,7 @@
 //  Copyright © 2017 Tony Chen. All rights reserved.
 //
 
-struct UStudents {
+struct StudentInformation {
     
     let objectId: AnyObject
     let uniqueKey: AnyObject
@@ -36,12 +36,12 @@ struct UStudents {
     }
     
     
-    static func studentsFromResult(_ results: [[String: AnyObject]]) -> [UStudents]{
+    static func studentsFromResult(_ results: [[String: AnyObject]]) -> [StudentInformation]{
         
-        var students = [UStudents]()
+        var students = [StudentInformation]()
         
         for result in results {
-            students.append(UStudents(dictionary: result))
+            students.append(StudentInformation(dictionary: result))
         }
         
         return students

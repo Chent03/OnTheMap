@@ -12,6 +12,9 @@ import MapKit
 class PostInfoViewController: UIViewController, UINavigationControllerDelegate, MKMapViewDelegate {
     
     
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
+    
+    
     @IBOutlet weak var introLabel: UILabel!
 
     @IBOutlet weak var middleView: UIView!
@@ -32,16 +35,18 @@ class PostInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.activitySpinner.isHidden = true
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.hideKeyBoardTapped()
     }
 
     @IBAction func cancelAction(_ sender: Any) {
         
-        print("Clicking")
         
         self.dismiss(animated: true, completion: nil)
         self.moveToSubmit(enable: false)
@@ -50,20 +55,15 @@ class PostInfoViewController: UIViewController, UINavigationControllerDelegate, 
     @IBAction func findOnMap(_ sender: Any) {
         
         guard locationText.text != "" else {
-            print("No location text")
             self.alertBox(message: "Please enter a location text")
             return
         }
-//        
-//        if let mediaURLString = mediaURL.text, mediaURL.text != "" && submitButton.titleLabel?.text == "Submit" {
-//            print(mediaURLString)
-//        }
-        
         
         if submitButton.titleLabel?.text != "Submit" {
             
             mapString = locationText.text!
-            
+            self.activitySpinner.isHidden = false
+            self.activitySpinner.startAnimating()
             getGeoCode(address: mapString!)
             
             
@@ -74,7 +74,7 @@ class PostInfoViewController: UIViewController, UINavigationControllerDelegate, 
                 
                 DispatchQueue.main.async{
                     guard error == nil else{
-                        print("post failed")
+                        self.alertBox(message: (error?.localizedDescription)!)
                         return
                     }
                     
@@ -97,6 +97,7 @@ class PostInfoViewController: UIViewController, UINavigationControllerDelegate, 
         self.middleView.isHidden = enable
         self.introLabel.isHidden = enable
         if enable == true{
+            self.activitySpinner.stopAnimating()
             self.bottomView.alpha = 0.4
             self.submitButton.setTitle("Submit", for: .normal)
         }else {
@@ -108,23 +109,17 @@ class PostInfoViewController: UIViewController, UINavigationControllerDelegate, 
     func getGeoCode(address: String) {
         let enteredAddress = address
         
-//        print(enteredAddress)
         
         let geoCode = CLGeocoder()
         
-//        print(geoCode)
         geoCode.geocodeAddressString(enteredAddress) { (results, error) in
             
-            
-//            print(results)
-//            print(error)
-            
+
             
             if let pinLocation = results?[0] {
                 self.lat = (pinLocation.location?.coordinate.latitude)!
                 self.long = (pinLocation.location?.coordinate.longitude)!
                 self.mapView.showAnnotations([MKPlacemark(placemark: pinLocation)], animated: true)
-                print("success")
                 self.moveToSubmit(enable: true)
             } else if error != nil {
                 self.alertBox(message: "Cannot find location")

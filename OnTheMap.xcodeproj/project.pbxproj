@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EA71AF921F01CDD40023B79A /* PostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA71AF911F01CDD40023B79A /* PostInfoViewController.swift */; };
 		EA71AF941F04A9DE0023B79A /* ExtendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA71AF931F04A9DE0023B79A /* ExtendViewController.swift */; };
+		EA93FDBB1F0B42BF004BACE3 /* UStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93FDBA1F0B42BF004BACE3 /* UStudent.swift */; };
 		EAA6471A1F0056AF003F3777 /* StudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA647191F0056AF003F3777 /* StudentTableViewController.swift */; };
 		EAE1FB9C1EF84CB100A906B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FB9B1EF84CB100A906B8 /* AppDelegate.swift */; };
 		EAE1FB9E1EF84CB100A906B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FB9D1EF84CB100A906B8 /* LoginViewController.swift */; };
@@ -20,12 +21,13 @@
 		EAE1FBB71EF8B57E00A906B8 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB61EF8B57E00A906B8 /* GCDBlackBox.swift */; };
 		EAE1FBBA1EFAD92200A906B8 /* Uconvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB91EFAD92200A906B8 /* Uconvenience.swift */; };
 		EAE1FBBC1EFB08B900A906B8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBBB1EFB08B900A906B8 /* MapViewController.swift */; };
-		EAE1FBC41EFB4DD300A906B8 /* UStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBC31EFB4DD300A906B8 /* UStudents.swift */; };
+		EAE1FBC41EFB4DD300A906B8 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBC31EFB4DD300A906B8 /* StudentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EA71AF911F01CDD40023B79A /* PostInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
 		EA71AF931F04A9DE0023B79A /* ExtendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendViewController.swift; sourceTree = "<group>"; };
+		EA93FDBA1F0B42BF004BACE3 /* UStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UStudent.swift; sourceTree = "<group>"; };
 		EAA647191F0056AF003F3777 /* StudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewController.swift; sourceTree = "<group>"; };
 		EAE1FB981EF84CB100A906B8 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE1FB9B1EF84CB100A906B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,7 +41,7 @@
 		EAE1FBB61EF8B57E00A906B8 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EAE1FBB91EFAD92200A906B8 /* Uconvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Uconvenience.swift; sourceTree = "<group>"; };
 		EAE1FBBB1EFB08B900A906B8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		EAE1FBC31EFB4DD300A906B8 /* UStudents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UStudents.swift; sourceTree = "<group>"; };
+		EAE1FBC31EFB4DD300A906B8 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,8 @@
 		EAE1FBAD1EF87AA800A906B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EAE1FBC31EFB4DD300A906B8 /* StudentInformation.swift */,
+				EA93FDBA1F0B42BF004BACE3 /* UStudent.swift */,
 				EAE1FBAE1EF890E300A906B8 /* Udacity */,
 			);
 			name = Model;
@@ -98,7 +102,6 @@
 				EAE1FBB91EFAD92200A906B8 /* Uconvenience.swift */,
 				EAE1FBB31EF8A4B100A906B8 /* UClient.swift */,
 				EAE1FBB11EF8A11500A906B8 /* UConstants.swift */,
-				EAE1FBC31EFB4DD300A906B8 /* UStudents.swift */,
 			);
 			name = Udacity;
 			sourceTree = "<group>";
@@ -189,7 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE1FBB41EF8A4B100A906B8 /* UClient.swift in Sources */,
-				EAE1FBC41EFB4DD300A906B8 /* UStudents.swift in Sources */,
+				EAE1FBC41EFB4DD300A906B8 /* StudentInformation.swift in Sources */,
 				EAE1FBB21EF8A11500A906B8 /* UConstants.swift in Sources */,
 				EAE1FB9E1EF84CB100A906B8 /* LoginViewController.swift in Sources */,
 				EAE1FB9C1EF84CB100A906B8 /* AppDelegate.swift in Sources */,
@@ -197,6 +200,7 @@
 				EAE1FBB71EF8B57E00A906B8 /* GCDBlackBox.swift in Sources */,
 				EAE1FBBA1EFAD92200A906B8 /* Uconvenience.swift in Sources */,
 				EAE1FBBC1EFB08B900A906B8 /* MapViewController.swift in Sources */,
+				EA93FDBB1F0B42BF004BACE3 /* UStudent.swift in Sources */,
 				EA71AF921F01CDD40023B79A /* PostInfoViewController.swift in Sources */,
 				EAA6471A1F0056AF003F3777 /* StudentTableViewController.swift in Sources */,
 			);

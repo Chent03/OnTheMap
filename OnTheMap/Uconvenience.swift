@@ -61,7 +61,7 @@ extension UClient {
         
     }
     
-    func loginUdacity(email: String, password: String, completionHandlerForSessionID: @escaping(_ success: Bool, _ requestSession: String?, _ errorString: String?) -> Void) {
+    func loginUdacity(email: String, password: String, completionHandlerForSessionID: @escaping(_ success: Bool, _ requestSession: String?, _ errorString: NSError?) -> Void) {
         
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "POST"
@@ -74,23 +74,29 @@ extension UClient {
         
         
         let _ = taskforPOSTMethod(request){ (success, results, error) in
+            
+            
+            
+            func sendError(_ error: String){
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandlerForSessionID(false, nil, NSError(domain: "loginUdacity", code: 1, userInfo: userInfo))
+            }
         
             if let error = error {
-                print(error)
-                completionHandlerForSessionID(false, nil, "Login Failed(Session_ID)")
+                sendError("There was an error with your request: \(error)")
             } else {
                 
                 guard let accountResult = results?["account"] as? [String:AnyObject] else {
-                    print("Can't get account results")
+                    sendError("Can't get accoutnt results")
                     return
                 }
                 guard let sessionResult = results?["session"] as? [String:AnyObject] else {
-                    print("Can't get session result")
+                    sendError("Can't get session result")
                     return
                 }
                 
                 guard let accountKey = accountResult["key"] as? String else {
-                    print("No key")
+                    sendError("Can't find key in account")
                     return
                 }
                 
@@ -101,11 +107,9 @@ extension UClient {
                 
                 if let sessionID = sessionResult["id"] as? String {
                     self.sessionNum = sessionID
-                    print(self.sessionNum!)
                     completionHandlerForSessionID(true, sessionID, nil)
                 } else {
-                    print("Could not find id key")
-                    completionHandlerForSessionID(false, nil, "Login Failed")
+                    sendError("Can't find id key")
                 }
             }
         }
@@ -116,6 +120,9 @@ extension UClient {
         let requst = NSMutableURLRequest(url: URL(string: Methods.GETUserInfo + self.userID!)!)
         
         self.taskforGET(requst) { (success, result, error) in
+            
+           
+            
             guard error == nil else{
                 print("error in getting profile")
                 return
@@ -143,24 +150,31 @@ extension UClient {
     }
     
     
-    func loadStudentLocations(method: String, completionHandlerForLocations: @escaping(_ success: Bool , _ studentLocations: [UStudents]?, _ errorString: String?) -> Void) {
+    func loadStudentLocations(method: String, completionHandlerForLocations: @escaping(_ success: Bool , _ studentLocations: [StudentInformation]?, _ errorString: NSError?) -> Void) {
     
         
         let _ = taskforGETMethod(method) { (success, results, error) in
             
+            
+            func sendError(_ error: String){
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandlerForLocations(false, nil, NSError(domain: "loadStudentLocations", code: 1, userInfo: userInfo))
+            }
+            
+            
             if let error = error {
                 print(error)
-                completionHandlerForLocations(false, nil, "Couldn't get data")
+                sendError("Error loading students \(error)")
+                
             } else {
                 
                 if let results = results?["results"] as? [[String:AnyObject]]{
                     
-                    let students = UStudents.studentsFromResult(results)
-//                    print(students)
+                    let students = StudentInformation.studentsFromResult(results)
                     completionHandlerForLocations(true, students, nil)
                     
                 } else{
-                    completionHandlerForLocations(false, nil, "Failed to get data")
+                    sendError("Could not get results")
                 }
                 
             }

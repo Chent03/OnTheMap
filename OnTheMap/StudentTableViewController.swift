@@ -10,7 +10,7 @@ import UIKit
 
 class StudentTableViewController: UITableViewController {
     
-    var Ustudents: [UStudents] = [UStudents]()
+    var Ustudents = UStudent.sharedInstance().studentInformation
     
     @IBOutlet weak var addPin: UIBarButtonItem!
     @IBOutlet weak var logout: UIBarButtonItem!
@@ -86,9 +86,12 @@ extension StudentTableViewController {
             return
         }
         
-        let url = URL(string: individual.mediaURL as! String)
+        if let url = URL(string: individual.mediaURL as! String), UIApplication.shared.canOpenURL(url){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }else {
+            self.alertBox(message: "Cannot open media link")
+        }
         
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @IBAction func logingOut(_ sender: UIBarButtonItem) {
@@ -97,7 +100,7 @@ extension StudentTableViewController {
             
             DispatchQueue.main.async{
                 guard error == nil else{
-                    print("logout failed")
+                    self.alertBox(message: (error?.localizedDescription)!)
                     return
                 }
                 
@@ -119,18 +122,14 @@ extension StudentTableViewController {
             
             DispatchQueue.main.async {
                 guard error == nil else {
-                    print("Login failed")
+                    self.alertBox(message: (error?.localizedDescription)!)
                     return
                 }
-                guard success == true else {
-                    print("Success was false")
-                    return
-                }
-                
                 if success {
                     self.Ustudents = results!
                     self.studentView.reloadData()
-                    
+                } else {
+                    self.alertBox(message: "Cannot refresh table")
                 }
                 
             }

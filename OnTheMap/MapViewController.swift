@@ -13,9 +13,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    var Ustudents = [UStudents]()
-    var annotations = [MKPointAnnotation]()
+//    
+//    var Ustudents = [StudentInformation]()
+//    var annotations = [MKPointAnnotation]()
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,27 +29,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             DispatchQueue.main.async {
                 guard error == nil else {
-//                    print("Login failed")
-                    return
-                }
-                guard success == true else {
-//                    print("Success was false")
+                    self.alertBox(message: (error?.localizedDescription)!)
                     return
                 }
                 
-
-                if let students = results {
-                    self.Ustudents = students
-                }
-                
-                for student in self.Ustudents{
+                if success {
                     
-                    self.pinLocations(student: student)
-//                    print(student.latitude)
-//                    print("HI")
+                    if let students = results {
+                        UStudent.sharedInstance().studentInformation = students
+                    }
                     
+                    for student in UStudent.sharedInstance().studentInformation{
+                        
+                        self.pinLocations(student: student)
+                        
+                    }
+                    
+                    self.mapView.addAnnotations(UStudent.sharedInstance().annotations)
                 }
-                self.mapView.addAnnotations(self.annotations)
                 
             }
         }
@@ -63,7 +60,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func pinLocations(student: UStudents){
+    func pinLocations(student: StudentInformation){
         
         
         guard student.latitude is Double else {
@@ -95,8 +92,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotation.coordinate = coordinate
         annotation.title = "\(first)\(last)"
         annotation.subtitle = mediaURL
-            
-        annotations.append(annotation)
+        
+        
+        UStudent.sharedInstance().annotations.append(annotation)
 
         
     }
@@ -125,11 +123,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
                 
-                let link = URL(string: toOpen)
+                if let link = URL(string: toOpen), app.canOpenURL(link){
+                    app.open(link, options: [:], completionHandler: nil)
+                }else{
+                    self.alertBox(message: "Cannot open media link")
+
+                }
+            
                 
-                app.open(link!, options: [:], completionHandler: nil)
-                
-//                app.openURL(URL(string: toOpen)!)
             }
         }
     }
@@ -165,25 +166,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             DispatchQueue.main.async {
                 guard error == nil else {
-//                    print("Login failed")
-                    return
-                }
-                guard success == true else {
-//                    print("Success was false")
+                    
+                    self.alertBox(message: "Cannot refresh data")
                     return
                 }
                 
-                
-                if let students = results {
-                    self.Ustudents = students
+                if success {
+                    if let students = results {
+                        UStudent.sharedInstance().studentInformation = students
+                    }
+                    
+                    for student in UStudent.sharedInstance().studentInformation{
+                        
+                        self.pinLocations(student: student)
+                        
+                    }
+                    self.mapView.addAnnotations(UStudent.sharedInstance().annotations)
                 }
                 
-                for student in self.Ustudents{
-                    
-                    self.pinLocations(student: student)
-                    
-                }
-                self.mapView.addAnnotations(self.annotations)
+                
+                
                 
             }
         }
