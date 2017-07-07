@@ -38,7 +38,7 @@ extension UClient {
             }
             
             guard error == nil else{
-                sendError("Error in retrieving")
+                sendError("Error in retrieving data")
                 return
             }
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
@@ -51,10 +51,7 @@ extension UClient {
                 return
             }
             
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
-            
             completionHandlerForPOSTING(true, nil)
-            
             
         }
         task.resume()
@@ -71,23 +68,19 @@ extension UClient {
 
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
         
-        
-        
         let _ = taskforPOSTMethod(request){ (success, results, error) in
-            
-            
             
             func sendError(_ error: String){
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForSessionID(false, nil, NSError(domain: "loginUdacity", code: 1, userInfo: userInfo))
             }
         
-            if let error = error {
-                sendError("There was an error with your request: \(error)")
+            if error != nil {
+                sendError((error?.localizedDescription)!)
             } else {
                 
                 guard let accountResult = results?["account"] as? [String:AnyObject] else {
-                    sendError("Can't get accoutnt results")
+                    sendError("Can't get account results")
                     return
                 }
                 guard let sessionResult = results?["session"] as? [String:AnyObject] else {
@@ -121,8 +114,6 @@ extension UClient {
         
         self.taskforGET(requst) { (success, result, error) in
             
-           
-            
             guard error == nil else{
                 print("error in getting profile")
                 return
@@ -141,17 +132,12 @@ extension UClient {
                 print("Missing")
             }
             
-    
-        
-        
         }
-        
         
     }
     
     
     func loadStudentLocations(method: String, completionHandlerForLocations: @escaping(_ success: Bool , _ studentLocations: [StudentInformation]?, _ errorString: NSError?) -> Void) {
-    
         
         let _ = taskforGETMethod(method) { (success, results, error) in
             
@@ -162,9 +148,8 @@ extension UClient {
             }
             
             
-            if let error = error {
-                print(error)
-                sendError("Error loading students \(error)")
+            if error != nil {
+                sendError((error?.localizedDescription)!)
                 
             } else {
                 

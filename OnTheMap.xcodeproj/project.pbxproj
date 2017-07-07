@@ -18,7 +18,6 @@
 		EAE1FBA61EF84CB100A906B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE1FBA41EF84CB100A906B8 /* LaunchScreen.storyboard */; };
 		EAE1FBB21EF8A11500A906B8 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB11EF8A11500A906B8 /* UConstants.swift */; };
 		EAE1FBB41EF8A4B100A906B8 /* UClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB31EF8A4B100A906B8 /* UClient.swift */; };
-		EAE1FBB71EF8B57E00A906B8 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB61EF8B57E00A906B8 /* GCDBlackBox.swift */; };
 		EAE1FBBA1EFAD92200A906B8 /* Uconvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBB91EFAD92200A906B8 /* Uconvenience.swift */; };
 		EAE1FBBC1EFB08B900A906B8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBBB1EFB08B900A906B8 /* MapViewController.swift */; };
 		EAE1FBC41EFB4DD300A906B8 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE1FBC31EFB4DD300A906B8 /* StudentInformation.swift */; };
@@ -38,7 +37,6 @@
 		EAE1FBA71EF84CB100A906B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE1FBB11EF8A11500A906B8 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UConstants.swift; sourceTree = "<group>"; };
 		EAE1FBB31EF8A4B100A906B8 /* UClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UClient.swift; sourceTree = "<group>"; };
-		EAE1FBB61EF8B57E00A906B8 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EAE1FBB91EFAD92200A906B8 /* Uconvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Uconvenience.swift; sourceTree = "<group>"; };
 		EAE1FBBB1EFB08B900A906B8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EAE1FBC31EFB4DD300A906B8 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				EAE1FB9B1EF84CB100A906B8 /* AppDelegate.swift */,
-				EAE1FBB61EF8B57E00A906B8 /* GCDBlackBox.swift */,
 				EAE1FB9F1EF84CB100A906B8 /* Main.storyboard */,
 				EAE1FBAD1EF87AA800A906B8 /* Model */,
 				EAE1FBB51EF8A6F200A906B8 /* Controller */,
@@ -197,7 +194,6 @@
 				EAE1FB9E1EF84CB100A906B8 /* LoginViewController.swift in Sources */,
 				EAE1FB9C1EF84CB100A906B8 /* AppDelegate.swift in Sources */,
 				EA71AF941F04A9DE0023B79A /* ExtendViewController.swift in Sources */,
-				EAE1FBB71EF8B57E00A906B8 /* GCDBlackBox.swift in Sources */,
 				EAE1FBBA1EFAD92200A906B8 /* Uconvenience.swift in Sources */,
 				EAE1FBBC1EFB08B900A906B8 /* MapViewController.swift in Sources */,
 				EA93FDBB1F0B42BF004BACE3 /* UStudent.swift in Sources */,

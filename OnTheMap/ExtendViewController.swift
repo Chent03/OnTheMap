@@ -6,9 +6,17 @@
 //  Copyright © 2017 Tony Chen. All rights reserved.
 //
 
+
+import Foundation
 import UIKit
 
 extension UIViewController {
+    
+    func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            updates()
+        }
+    }
     
     func alertBox(message: String){
         let alertCtrl = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

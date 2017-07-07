@@ -32,13 +32,19 @@ class UClient : NSObject {
             }
             
             guard(error == nil) else {
-                sendError("There was an error with the request: \(error!)")
+                sendError("There was an error in retrieving account. Please check internet connection")
                 return
             }
             
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                sendError("Please check your internet connection")
                 return
+            }
+            
+            print(statusCode)
+            
+            if statusCode == 400 || statusCode == 403 {
+                sendError("Re-enter credentials")
             }
             
             guard let data = data else {
@@ -49,10 +55,6 @@ class UClient : NSObject {
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range)
             
-            
-//            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-            
-                    
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForPost)
         }
         
@@ -76,10 +78,7 @@ class UClient : NSObject {
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            
-            
             func sendError(_ error: String){
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 completionHandlerForDelete(false, NSError(domain: "taskForDELETEMethod", code: 1, userInfo: userInfo))
             }
@@ -102,9 +101,6 @@ class UClient : NSObject {
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range)
             
-            
-            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-            
             completionHandlerForDelete(true, nil)
             
         }
@@ -116,9 +112,7 @@ class UClient : NSObject {
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            
             func sendError(_ error: String){
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 completiongHandlerGET(false, nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
             }
@@ -138,11 +132,9 @@ class UClient : NSObject {
                 return
             }
             
-            
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range)
             
-//            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completiongHandlerGET)
 
         }
@@ -152,7 +144,6 @@ class UClient : NSObject {
     }
     
     func taskforGETMethod(_ method: String, completionHandlerForGET: @escaping (_ success: Bool?, _ result: AnyObject?, _ error: NSError?)-> Void) -> URLSessionDataTask{
-        
         
         let request = NSMutableURLRequest(url: URL(string: method)!)
         
@@ -164,9 +155,7 @@ class UClient : NSObject {
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            
             func sendError(_ error: String){
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 completionHandlerForGET(false, nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
             }
@@ -185,8 +174,6 @@ class UClient : NSObject {
                 sendError("No data was returned by the request")
                 return
             }
-            
-//            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
             
